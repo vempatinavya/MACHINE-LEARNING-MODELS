@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar  9 14:56:15 2022
+
+@author: Navya
+"""
+
+import pandas as pd
+d=pd.read_csv(r'C:\Users\Navya\Downloads\IMDB-Movie-Data.csv')
+#print(d[d['Year']==2016].count())
+print(d.shape)
+#print(d.size)
+#print(d.columns)
+#print(d['Year'])
+#print(d['Year'].value_counts())
+#print(d['Year'].unique())
+#d[(d['Director']=="Ridely Scott")& (d['Year']==2012)] .count()
+#z=d[(d['Revenue (Millions)']>100)&(d['Year']==2012)]
+d[(d['Director']=="Ridley Scott") | (d['Director']=="Sean Foley")]
+#d[(d['Year']==2016)&(d['Revenue (Millions)']<d['Revenue (Millions)'].quantile(0.25))]
+
+
+import numpy as np
+d.iloc[:,:]
+d.iloc[0:1,1:2]
+d['Title']=d['Title'].replace(to_replace='Guardians of the Galaxy',value='hi')
+d['Title']=d['Title'].replace(to_replace='hi',value='Guardians of the Galaxy')
+
+
