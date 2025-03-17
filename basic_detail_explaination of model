@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 26 15:35:23 2022
+
+@author: Navya
+"""
+
+import pandas as pd
+h=['top-left-square','top-middle-square','top-right-square','middle-left-square','middle-middle-square',
+'middle-right-square','bottom-left-square','bottom-middle-square','bottom-right-square','Class']
+d=pd.read_csv(r'C:\Users\Navya\Downloads\Book2.csv',names=h)
+
+d.head()    #top 5rows printing
+d.shape     #total rows and columns
+
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+d['top-left-square']=le.fit_transform(d['top-left-square'])
+d['top-middle-square']=le.fit_transform(d['top-middle-square'])
+d['top-right-square']=le.fit_transform(d['top-right-square'])
+d['middle-left-square']=le.fit_transform(d['middle-left-square'])
+d['middle-middle-square']=le.fit_transform(d['middle-middle-square'])
+d['middle-right-square']=le.fit_transform(d['middle-right-square'])
+d['bottom-left-square']=le.fit_transform(d['bottom-left-square'])
+d['bottom-middle-square']=le.fit_transform(d['bottom-middle-square'])
+d['bottom-right-square']=le.fit_transform(d['bottom-right-square'])
+d['Class']=le.fit_transform(d['Class'])
+d=d.fillna(0)#--->empty spaces filled with 0 with help of pandas
+"""
+spliting of xtest,ytest,xtrain,ytrain"""
+x=d.iloc[:,:8].values
+y=d.iloc[:,8].values
+print(x.shape)
+print(y.shape)
+print(type(d))
+print(type(x))
+print(type(y))
+
+
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.20,random_state=5)
+print(xtrain.shape)
+print(xtest.shape)
+print(ytrain.shape)
+print(ytest.shape)
+
+
+
+from sklearn.neighbors import KNeighborsClassifier
+model=KNeighborsClassifier(n_neighbors=14)
+model.fit(xtrain,ytrain)
+#-->ypred 
+ypred=model.predict(xtest)
+print(ypred.shape)
+#-->accuracy check ytest with ypred
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,ypred)*100)
